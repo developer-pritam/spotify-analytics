@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import { theme, mixins, Main } from '../styles';
 const { colors, fontSizes } = theme;
 
-const LOGIN_URI =
-  process.env.NODE_ENV !== 'production'
-    ? 'http://localhost:8888/login'
-    : 'https://spotify-profile.herokuapp.com/login';
-
+const BACKEND_URI =
+  process.env.REACT_APP_BACKEND_URI ||
+  'http://localhost:5700/pingolearn-development/us-central1/spotifyAnalytics';
+const LOGIN_URI = `${BACKEND_URI}/login`;
 const Login = styled(Main)`
   ${mixins.flexCenter};
   flex-direction: column;

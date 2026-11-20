@@ -78,9 +78,9 @@ if (cluster.isMaster) {
     )
     .use(express.static(path.resolve(__dirname, '../client/build')));
 
-  app.get('/', function (req, res) {
-    res.render(path.resolve(__dirname, '../client/build/index.html'));
-  });
+  // app.get('/', function (req, res) {
+  //   res.render(path.resolve(__dirname, '../client/build/index.html'));
+  // });
 
   app.get('/login', function (req, res) {
     const state = generateRandomString(16);
@@ -88,7 +88,7 @@ if (cluster.isMaster) {
 
     // your application requests authorization
     const scope =
-      'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public';
+      'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public user-read-currently-playing';
 
     res.redirect(
       `https://accounts.spotify.com/authorize?${querystring.stringify({
@@ -173,9 +173,9 @@ if (cluster.isMaster) {
   });
 
   // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function (request, response) {
-    response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
-  });
+  // app.get('*', function (request, response) {
+  //   response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
+  // });
 
   app.listen(PORT, function () {
     console.warn(`Node cluster worker ${process.pid}: listening on port ${PORT}`);

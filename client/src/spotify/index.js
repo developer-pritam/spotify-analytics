@@ -18,12 +18,15 @@ const getLocalAccessToken = () =>
   window.localStorage.getItem('spotify_access_token');
 const getLocalRefreshToken = () =>
   window.localStorage.getItem('spotify_refresh_token');
-
+const BACKEND_URI =
+  process.env.REACT_APP_BACKEND_URI ||
+  'http://localhost:5700/pingolearn-development/us-central1/spotifyAnalytics';
 // Refresh the token
+
 const refreshAccessToken = async () => {
   try {
     const { data } = await axios.get(
-      `http://localhost:8888/refresh_token?refresh_token=${getLocalRefreshToken()}`,
+      `${BACKEND_URI}/refresh_token?refresh_token=${getLocalRefreshToken()}`,
     );
     const { access_token } = data;
     setLocalAccessToken(access_token);
